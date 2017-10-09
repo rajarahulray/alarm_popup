@@ -4,6 +4,7 @@ import time
 import tkinter as t
 import sys
 import os
+import time
 
 '''Abbrevations :
 1. trm : terminal
@@ -18,6 +19,7 @@ import os
 def alm_wdw():
     root = t.Tk();
     root.config(bg = 'white');
+    root.attributes('-topmost', True);
     root.geometry("450x80+1100+580");
     alm_lbl = t.Label(root, text = "Rule no. 10:\nTime to leave desk for a couple of minutes.")
     alm_lbl.config(bg = 'white',font = ('Calibri', 13));
@@ -50,12 +52,15 @@ else:
 
 try:
     if mit > 0:
+        cur_time = str(time.localtime()[3]) + ":" + str(time.localtime()[4]) + ":" + str(time.localtime()[5]) ;
+        print("Current Time : {}".format(cur_time));
         print("Setting an alarm for {} {}".format(mit, unt));
-        time.sleep(sec);
+        time.sleep(sec);    
         alm_wdw();
-    
+    cur_time = str(time.localtime()[3]) + ":" + str(time.localtime()[4]) + ":" + str(time.localtime()[5]) ;
+    print("Alarm switched off at : {}".format(cur_time));
     print("Exiting Aplication...");
-    os.system('sudo pm-suspend');
+    os.system('sudo systemctl suspend');
 
 except KeyboardInterrupt:
           print("Interupted by user..");
