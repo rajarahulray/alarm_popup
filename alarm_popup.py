@@ -3,6 +3,7 @@
 import time 
 import tkinter as t
 import sys
+import os
 
 '''Abbrevations :
 1. trm : terminal
@@ -54,7 +55,7 @@ try:
         alm_wdw();
     
     print("Exiting Aplication...");
-    sys.exit(1);
+    os.system('sudo pm-suspend');
 
 except KeyboardInterrupt:
           print("Interupted by user..");
