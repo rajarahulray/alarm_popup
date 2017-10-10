@@ -18,10 +18,11 @@ import time
 
 def alm_wdw():
     root = t.Tk();
+    root.title("Programmer_Alarm");
     root.config(bg = 'white');
     root.attributes('-topmost', True);
     root.geometry("450x80+1100+580");
-    alm_lbl = t.Label(root, text = "Rule no. 10:\nTime to leave desk for a couple of minutes.")
+    alm_lbl = t.Label(root, text = "\nRule no. 10:\nTime to leave desk for a couple of minutes.")
     alm_lbl.config(bg = 'white',font = ('Calibri', 13));
     alm_lbl.pack();
     root.mainloop();
@@ -53,7 +54,7 @@ else:
 try:
     if mit > 0:
         cur_time = str(time.localtime()[3]) + ":" + str(time.localtime()[4]) + ":" + str(time.localtime()[5]) ;
-        print("Current Time : {}".format(cur_time));
+        print("Current Time - {}".format(cur_time));
         print("Setting an alarm for {} {}".format(mit, unt));
         time.sleep(sec);    
         alm_wdw();
