@@ -61,7 +61,22 @@ try:
     cur_time = str(time.localtime()[3]) + ":" + str(time.localtime()[4]) + ":" + str(time.localtime()[5]) ;
     print("Alarm switched off at : {}".format(cur_time));
     print("Exiting Aplication...");
-    os.system('sudo systemctl suspend');
+
+    slp = input("Do you want the system to sleep? (y/n)");
+
+    #going to sleep mode...
+    if slp == 'y':
+        ##for windows..
+        if os.environ['OS'] == "Windows_NT":
+            os.system('echo "PC going to sleep now.."');
+            os.system('rundll32.exe powrprof.dll,SetSuspendState 0,1,0')
+            
+        ##for ubuntu..
+        else:
+            os.system('echo "PC is going to sleep now.."')
+            os.system('sudo systemctl suspend');
+    else:
+        exit(0);
 
 except KeyboardInterrupt:
           print("Interupted by user..");
