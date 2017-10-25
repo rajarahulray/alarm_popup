@@ -15,6 +15,7 @@ import platform
 5. unt : unit (specifying unit for time.)
 6. alm_wdw : alarm window
 7. alm_lbl = alarm Label
+8. msg = message defined by user..
 '''
 
 def alm_wdw():
@@ -22,19 +23,30 @@ def alm_wdw():
     root.title("Programmer_Alarm");
     root.config(bg = 'white');
     root.attributes('-topmost', True);
-    root.geometry("450x80+1100+580");
-    alm_lbl = t.Label(root, text = "\nRule no. 10:\nTime to leave desk for a couple of minutes.")
+    root.geometry("450x100+1100+580");
+    alm_lbl = t.Label(root, text = "\nRule no. 10:\nTime to leave desk for a couple of minutes.\n\n'{}'".format(msg))
     alm_lbl.config(bg = 'white',font = ('Calibri', 13));
     alm_lbl.pack();
     root.mainloop();
 
 trm = sys.argv;
 len_trm = len(trm);
+msg = " ";
 
-if len_trm != 2:
-    print("Please pass the time to set an alarm for");
+if len_trm < 2:
+    print("Please pass the time to set an alarm for and then your message(--message='<message>')(optional)");
     sys.exit(0);
 
+#check for correct sysntax for message...(only for now...)
+elif len_trm > 3:
+    print("Please use underscore to seprate words in the message...");
+    exit(0);
+    
+#check for user-defined message...
+elif len_trm == 3:
+    if trm[2].find('--message') != -1:
+        msg = trm[2][trm[2].find("=") + 1 : ];
+        
 try:
     mit = int(trm[1]);
 
@@ -86,6 +98,7 @@ try:
             exit(0);
     except Exception as e:
         print(str(e));
+
         
 except KeyboardInterrupt:
           print("Interupted by user..");
