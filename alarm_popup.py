@@ -5,6 +5,7 @@ import tkinter as t
 import sys
 import os
 import time
+import platform
 
 '''Abbrevations :
 1. trm : terminal
@@ -62,22 +63,30 @@ try:
     print("Alarm switched off at : {}".format(cur_time));
     print("Exiting Aplication...");
 
-    slp = input("Do you want the system to sleep? (y/n)");
-
+    #raw_input()..in case user is using Python2.7
+    try:
+        slp = input("Do you want the system to sleep? (y/n)");
+    except:
+        print("You are using Python2.x. Please Upgrade to Python3.x.");
+        slp = raw_input("Do you want the system to sleep? (y/n)");
+        
     #going to sleep mode...
-    if slp == 'y':
-        ##for windows..
-        if os.environ['OS'] == "Windows_NT":
-            os.system('echo "PC going to sleep now.."');
-            os.system('rundll32.exe powrprof.dll,SetSuspendState 0,1,0')
-            
-        ##for ubuntu..
+    try:
+        if slp == 'y': 
+            ##for windows..
+            if platform.system() == "Windows":
+                os.system('echo "PC going to sleep now.."');
+                os.system('rundll32.exe powrprof.dll,SetSuspendState 0,1,0')
+                
+            ##for ubuntu..
+            elif platform.system() == "Linux":
+                os.system('sudo systemctl suspend');                
+                os.system('echo "PC is going to sleep now.."')
         else:
-            os.system('echo "PC is going to sleep now.."')
-            os.system('sudo systemctl suspend');
-    else:
-        exit(0);
-
+            exit(0);
+    except Exception as e:
+        print(str(e));
+        
 except KeyboardInterrupt:
           print("Interupted by user..");
           sys.exit(1);
