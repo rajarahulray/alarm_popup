@@ -24,8 +24,8 @@ def alm_wdw():
     root.config(bg = 'white');
     root.attributes('-topmost', True);
     root.geometry("450x100+1100+580");
-    alm_lbl = t.Label(root, text = "\nRule no. 10:\nTime to leave desk for a couple of minutes.\n\n'{}'".format(msg))
-    alm_lbl.config(bg = 'white',font = ('Calibri', 13));
+    alm_lbl = t.Label(root, text = "\nRule no. 10:\nTime to leave desk for a couple of minutes.\n\n{}".format(msg))
+    alm_lbl.config(bg = 'white',font = ('Times New Roman', 15));
     alm_lbl.pack();
     root.mainloop();
 
@@ -46,7 +46,6 @@ elif len_trm > 3:
 elif len_trm == 3:
     if trm[2].find('--message') != -1:
         msg = trm[2][trm[2].find("=") + 1 : ];
-        
 try:
     mit = int(trm[1]);
 
