@@ -1,7 +1,10 @@
 '''A program to set an alarm notification for the time specified...'''
 
 import time 
-import tkinter as t
+try:
+	import tkinter as t
+except:
+	import Tkinter as t
 import sys
 import os
 import time
@@ -86,9 +89,11 @@ try:
         if slp == 'y': 
             ##for windows..
             if platform.system() == "Windows":
-                os.system('echo "PC going to sleep now.."');
-                os.system('rundll32.exe powrprof.dll,SetSuspendState 0,1,0')
-                
+                try:    
+                    os.system('echo "PC going to sleep now.."');
+                    os.system('rundll32.exe powrprof.dll,SetSuspendState 0,1,0')
+                except:
+                    os.system('%windir%\System32\rundll32.exe powrprof.dll,SetSuspendState Hibernate');
             ##for ubuntu..
             elif platform.system() == "Linux":
                 os.system('sudo systemctl suspend');                
