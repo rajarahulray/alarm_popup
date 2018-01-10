@@ -1,6 +1,5 @@
 '''A program to set an alarm notification for the time specified...'''
 
-import time 
 try:
 	import tkinter as t
 except:
