@@ -25,7 +25,7 @@ def alm_wdw():
     root.title("Programmer_Alarm");
     root.config(bg = 'white');
     root.attributes('-topmost', True);
-    root.geometry("450x100+1100+580");
+    root.geometry("450x150+1100+580");
     alm_lbl = t.Label(root, text = "\nRule no. 10:\nTime to leave desk for a couple of minutes.\n\n{}".format(msg))
     alm_lbl.config(bg = 'white',font = ('Times New Roman', 15));
     alm_lbl.pack();
@@ -85,7 +85,7 @@ try:
         
     #going to sleep mode...
     try:
-        if slp == 'y': 
+        if slp == 'y' or slp == 'Y': 
             ##for windows..
             if platform.system() == "Windows":
                 try:    
@@ -97,8 +97,9 @@ try:
             elif platform.system() == "Linux":
                 os.system('sudo systemctl suspend');                
                 os.system('echo "PC is going to sleep now.."')
-        else:
+        elif slp == 'n' or slp == 'N':
             exit(0);
+        
     except Exception as e:
         print(str(e));
 
