@@ -4,7 +4,7 @@ A program to set an alarm notification for the time specified...
 
 try:
     import tkinter as tk
-except ModuleNotFoundError:
+except ImportError:
     import Tkinter as tk
 import sys
 import os
