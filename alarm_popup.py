@@ -25,6 +25,10 @@ Abbreviations :
 
 
 def alm_wdw():
+    """
+
+    :return:
+    """
     root = tk.Tk()
     root.title("Programmer_Alarm")
     root.config(bg='white')
