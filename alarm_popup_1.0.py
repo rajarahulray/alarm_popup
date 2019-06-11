@@ -68,12 +68,16 @@ def check_command():
             print("Current Time - {}".format(cur_time))
             print("Setting an alarm for {} {}".format(minute, unit))
             time.sleep(sec)
-        cur_time = str(time.localtime()[3]) + ":" + str(time.localtime()[4]) + ":" + str(time.localtime()[5])
-        print("Alarm switched off at : {}".format(cur_time))
 
     except KeyboardInterrupt:
         print("Interrupted by user..")
         sys.exit(1)
+
+
+def exit_program():
+    cur_time = str(time.localtime()[3]) + ":" + str(time.localtime()[4]) + ":" + str(time.localtime()[5])
+    print("Alarm switched off at : {}".format(cur_time))
+    exit(0)
 
 
 def run_again():
@@ -87,6 +91,8 @@ def sleep_pc():
             os.system('rundll32.exe powrprof.dll,SetSuspendState 0,1,0')
         except OSError:
             os.system('''%windir%\System32\rundll32.exe powrprof.dll,SetSuspendState Hibernate''')
+            cur_time = str(time.localtime()[3]) + ":" + str(time.localtime()[4]) + ":" + str(time.localtime()[5])
+            print("Alarm switched off at : {}".format(cur_time))
             exit(0)
             run_again()
     # for ubuntu..
@@ -96,6 +102,8 @@ def sleep_pc():
             sleep_child.expect('password')
             sleep_child.sendline('system password')
             print(sleep_child.read())
+            cur_time = str(time.localtime()[3]) + ":" + str(time.localtime()[4]) + ":" + str(time.localtime()[5])
+            print("Alarm switched off at : {}".format(cur_time))
             print('System is going to sleep now...')
             root.destroy()
             run_again()
@@ -108,11 +116,11 @@ check_command()
 
 root = tk.Tk()
 root.config(bg='white')
-root.geometry("450x120+1100+580")
+root.geometry("450x150+1100+580")
 alm_lbl = tk.Label(root,
                    text="\nRule no. 10:\nTime to leave desk for a couple of minutes.\n{0}".format(msg))
 alm_lbl.config(bg='white', font=('Calibri', 13))
 alm_lbl.pack()
 sleep_button = tk.Button(root, text="Sleep", command=sleep_pc).pack(side='left', padx=5, pady=5)
-exit_button = tk.Button(root, text="Exit", command=exit).pack(side='right', padx=5, pady=5)
+exit_button = tk.Button(root, text="Exit", command=exit_program).pack(side='right', padx=5, pady=5)
 root.mainloop()
