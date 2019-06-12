@@ -1,5 +1,6 @@
 """
 A program to set an alarm notification for the time specified...
+Place our system password in config.py file
 """
 
 try:
@@ -11,6 +12,7 @@ import os
 import time
 import platform
 import pexpect
+from config import config_dict
 
 """
 Abbreviations :
@@ -100,7 +102,7 @@ def sleep_pc():
         try:
             sleep_child = pexpect.spawn('sudo systemctl suspend')
             sleep_child.expect('password')
-            sleep_child.sendline('system password')
+            sleep_child.sendline(config_dict['system_password'])
             print(sleep_child.read())
             cur_time = str(time.localtime()[3]) + ":" + str(time.localtime()[4]) + ":" + str(time.localtime()[5])
             print("Alarm switched off at : {}".format(cur_time))
